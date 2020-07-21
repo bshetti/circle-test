@@ -16,6 +16,8 @@ from sqlalchemy.dialects.postgresql import JSON, JSONB
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import *
 
+#notes for testing with circle and snyk
+
 from lib.tracing import init_tracer
 import opentracing
 from opentracing.ext import tags

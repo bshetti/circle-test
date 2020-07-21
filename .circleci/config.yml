@@ -12,7 +12,8 @@ jobs:
           command: |
             echo 'export PATH=~$PATH:~/.local/bin' >> $BASH_ENV && source $BASH_ENV
             pip install --user -r requirements.txt
-      - snyk/scan
+      - snyk/scan:
+	  fail-on-issues: false
       - run:
           name: Run Unit Tests
           command: |

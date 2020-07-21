@@ -14,10 +14,6 @@ jobs:
             pip install --user -r requirements.txt
       - snyk/scan:
 	  fail-on-issues: false
-      - run:
-          name: Run Unit Tests
-          command: |
-            pytest
 
 workflows:
   build_test:

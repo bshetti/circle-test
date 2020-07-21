@@ -2,11 +2,16 @@ version: 2.1
 orbs:
   snyk: snyk/snyk@0.0.8
 jobs:
-  build_test:
+  app_test:
     docker:
       - image: circleci/python:3.7.4
     steps:
       - checkout
+      - setup_remote_caching: false
+      - run:
+          name: building image
+          command: |
+            echo
       - run:
           name: Install Python Dependencies
           command: |
@@ -15,8 +20,21 @@ jobs:
       - snyk/scan:
           fail-on-issues: false
           project: '${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}-app'
+  build_app:
+    docker:
+      - image: circleci/python:3.7.4
+    steps:
+      - checkout
+      - run:
+          name: Install Python Dependencies
+          command: |
+            echo 'export PATH=~$PATH:~/.local/bin' >> $BASH_ENV
+            echo 'export TAG=${CIRCLE_SHA1}' >> $BASH_ENV
+            echo 'export IMAGE_NAME=orb-snyk' >> $BASH_ENV && source $BASH_ENV
+            docker build -t order .
 
 workflows:
   build_test:
     jobs:
-      - build_test
+      - app_test
+      - build_app

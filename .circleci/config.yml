@@ -13,7 +13,7 @@ jobs:
             echo 'export PATH=~$PATH:~/.local/bin' >> $BASH_ENV && source $BASH_ENV
             pip install --user -r requirements.txt
       - snyk/scan:
-	  fail-on-issues: false
+          fail-on-issues: false
 
 workflows:
   build_test:

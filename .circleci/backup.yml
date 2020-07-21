@@ -20,6 +20,7 @@ jobs:
       - snyk/scan:
           fail-on-issues: false
           project: '${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}-app'
+
   build_app:
     docker:
       - image: circleci/python:3.7.4

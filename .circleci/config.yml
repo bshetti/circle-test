@@ -14,12 +14,7 @@ jobs:
             pip install --user -r requirements.txt
       - snyk/scan:
           fail-on-issues: false
-      - run:
-          name: Run Unit Tests
-          command: |
-            pytest
+          project: '${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}-app'
 
 workflows:
   build_test:
-    jobs:
-      - build_test

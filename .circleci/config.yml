@@ -7,11 +7,6 @@ jobs:
       - image: circleci/python:3.7.4
     steps:
       - checkout
-      - setup_remote_caching: false
-      - run:
-          name: building image
-          command: |
-            echo
       - run:
           name: Install Python Dependencies
           command: |

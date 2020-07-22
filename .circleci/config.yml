@@ -27,8 +27,8 @@ jobs:
           command: |
             echo 'export PATH=~$PATH:~/.local/bin' >> $BASH_ENV
             echo 'export TAG=${CIRCLE_SHA1}' >> $BASH_ENV
-            echo 'export IMAGE_NAME=orb-snyk' >> $BASH_ENV && source $BASH_ENV
-            docker build -t order .
+            echo 'export IMAGE_NAME=order' >> $BASH_ENV && source $BASH_ENV
+            docker build -t $IMAGE_NAME .
 
 workflows:
   build_test:

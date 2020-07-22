@@ -29,6 +29,12 @@ jobs:
             echo 'export TAG=${CIRCLE_SHA1}' >> $BASH_ENV
             echo 'export IMAGE_NAME=order' >> $BASH_ENV && source $BASH_ENV
             docker build -t $IMAGE_NAME .
+      - snyk/scan:
+          fail-on-issues: true
+          monitor-on-build: true
+          docker-image-name: $IMAGE_NAME
+          target-file: "Dockerfile"
+          project: ${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}-container
 
 workflows:
   build_test:

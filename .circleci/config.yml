@@ -29,6 +29,8 @@ jobs:
             echo 'export TAG=${CIRCLE_SHA1}' >> $BASH_ENV
             echo 'export IMAGE_NAME=circletest' >> $BASH_ENV && source $BASH_ENV
             docker build -t $DOCKER_LOGIN/$IMAGE_NAME -t $DOCKER_LOGIN/$IMAGE_NAME:$TAG .
+            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+            docker push $DOCKER_LOGIN/$IMAGE_NAME
       - snyk/scan:
           fail-on-issues: true
           monitor-on-build: true
@@ -56,6 +58,6 @@ workflows:
       - build_app:
           requires:
             - build_test
-      - push_image:
-          requires:
-            - build_app
+#      - push_image:
+#          requires:
+#            - build_app

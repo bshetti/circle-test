@@ -35,12 +35,12 @@ jobs:
           docker-image-name: $IMAGE_NAME
           target-file: "Dockerfile"
           project: ${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}-container
-   push_image:
-     steps:
-       - checkout
-       - setup_remote_docker:
-           docker_layer_caching: false
-       - run:
+  push_image:
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: false
+      - run:
            name: Push Docker image to Docker Hub
            command: |
              echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin

@@ -52,9 +52,9 @@ workflows:
   build_test:
     jobs:
       - build_test
-      - build_app
+      - build_app:
           requires:
             - build_test
-      - push_image
+      - push_image:
           requires:
             - build_app

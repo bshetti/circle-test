@@ -36,6 +36,8 @@ jobs:
           target-file: "Dockerfile"
           project: ${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}-container
   push_image:
+    docker:
+      - image: circleci/python:3.7.4
     steps:
       - checkout
       - setup_remote_docker:

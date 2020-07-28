@@ -32,7 +32,7 @@ jobs:
       - snyk/scan:
           fail-on-issues: true
           monitor-on-build: true
-          docker-image-name: $IMAGE_NAME
+          docker-image-name: $DOCKER_LOGIN/$IMAGE_NAME
           target-file: "Dockerfile"
           project: ${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}-container
   push_image:
@@ -52,4 +52,8 @@ workflows:
     jobs:
       - build_test
       - build_app
+          requires:
+            - build_test
       - push_image
+          requires:
+            - build_app

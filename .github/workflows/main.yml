@@ -6,6 +6,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
         python-version: [3.7]
@@ -36,6 +37,7 @@ jobs:
     - uses: actions/checkout@master
     - name: Run Snyk to check for vulnerabilities
       uses: snyk/actions/python@master
+      continue-on-error: true
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
